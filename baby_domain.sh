@@ -1,7 +1,16 @@
 #! /bin/bash
 
+generate_banner(){
+    	tool_name="$(basename "$0" | cut -c 1-11 | tr '[:lower:]' '[:upper:]')"  # Extract the first two characters of the script name
+	echo "===================================================================================="
+	echo "                                 $tool_name"
+	echo "===================================================================================="
+}
+generate_banner "$0"
+
+
 if [ -z "$1" ];then
-	figlet "Baby Recon" -c -f /usr/share/figlet/pagga.tlf | lolcat
+
 	printf "\n--------------------------------------------------------------------------------\n\n"
 	echo "Usage: ./baby_domain.sh <domain> <path to save file>"
 	exit 1
@@ -12,21 +21,21 @@ fi
 printf "\n....Waf00f.....\n\n" > $2
 wafw00f $domain >> $2
 
-figlet "######################################" -f /usr/share/figlet/digital.flf | lolcat
+echo "######################################" 
 
 printf "\n.....Host....\n\n" >> $2
 echo "[+]Executing host" 
 host $domain >> $2
 
-figlet "######################################" -f /usr/share/figlet/digital.flf | lolcat
+echo "######################################"
 
 printf "\n.....Whois.....\n\n" >> $2
 echo "[+]Executing whois"
 whois $domain >> $2
 
-figlet "######################################" -f /usr/share/figlet/digital.flf | lolcat
+echo "######################################"
 
-f=/home/pool/Documents/custom_babies
+f=$(pwd)
 subdomain() {
     printf "[+] Executing sublist3r -d $domain -o $f"
     sublist3r -d "$domain" -o "$f/subdomains.txt"
@@ -43,12 +52,12 @@ cat "$f/subdomains.txt" >> "$2"
 echo "[+]Executing TCP connect scan"
 nmap -iL "$f/subdomains.txt" -oX "$f/subdomains.txt.nmap.xml"
 
-figlet "######################################" -f /usr/share/figlet/digital.flf | lolcat
+echo "######################################"
 
 echo "[+]Executing nikto scan and looking for vulnerabilities"
 nikto -host $domain
 
-figlet "######################################" -f /usr/share/figlet/digital.flf | lolcat
+echo "######################################"
 
 
 for i in {0..5}
