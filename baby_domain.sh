@@ -6,12 +6,10 @@ generate_banner(){
 	echo "                                 $tool_name"
 	echo "===================================================================================="
 }
-generate_banner "$0"
 
 
 if [ -z "$1" ];then
-
-	printf "\n--------------------------------------------------------------------------------\n\n"
+	generate_banner "$0"
 	echo "Usage: ./baby_domain.sh <domain> <path to save file>"
 	exit 1
 else
