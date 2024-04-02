@@ -8,8 +8,7 @@ generate_banner(){
 }
 
 
-if [ -z "$1" ];then
-	echo "Temporary change"	
+if [ -z "$1" ];then	
 	generate_banner "$0"
 	echo "Usage: ./baby_domain.sh <domain> <path to save file>"
 	exit 1
