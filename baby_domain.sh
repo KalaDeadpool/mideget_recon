@@ -45,7 +45,7 @@ subdomain
 
 printf "\n....Subdomains...\n\n" >> $2
 cat "$f/subdomains.txt" >> "$2"
-
+echo "Saving your output of results in $2!"
 
 echo "[+]Executing TCP connect scan"
 nmap -iL "$f/subdomains.txt" -oX "$f/subdomains.txt.nmap.xml"
